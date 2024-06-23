@@ -1,0 +1,29 @@
+target: XML
+rulefile: MRTS_110_XML.conf
+testfile: MRTS_110_XML.yaml
+templates:
+- SecRule for TARGETS
+colkey:
+- - '/*'
+operator:
+- '@beginsWith'
+oparg:
+- foo
+phase:
+- 2
+- 3
+- 4
+testdata:
+  phase_methods:
+    2: post
+    3: post
+    4: post
+  targets:
+    - target: '/*'
+      test:
+        data:
+          <level1><level2>foo</level2><level2>bar</level2></level1>
+        input:
+          headers:
+            - name: Content-Type
+              value: application/xml

@@ -1,0 +1,31 @@
+target: ARGS_COMBINED_SIZE
+rulefile: MRTS_003_ARGS_COMBINED_SIZE.conf
+testfile: MRTS_003_ARGS_COMBINED_SIZE.yaml
+templates:
+- SecRule for TARGETS
+colkey:
+- - ''
+operator:
+- '@lt'
+oparg:
+- 2
+testdata:
+  phase_methods:
+    1: get
+    2: post
+    3: post
+    4: post
+  targets:
+    - target: ''
+      test:
+        data:
+          foo: attack
+    - target: ''
+      test:
+        data:
+          arg1: attack
+    - target: ''
+      test:
+        data:
+          arg2: attack
+

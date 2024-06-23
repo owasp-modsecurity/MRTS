@@ -1,0 +1,22 @@
+---
+meta:
+  author: MRTS generate-rules.py
+  enabled: true
+  name: MRTS_002_ARGS.yaml
+  description: Desc
+tests:
+- test_title: 100004-1
+  stages:
+  - stage:
+      input:
+        dest_addr: 127.0.0.1
+        port: 80
+        method: GET
+        headers:
+          User-Agent: OWASP MRTS test agent
+          Host: localhost
+          Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+        uri: /?arg1=attack
+        version: HTTP/1.1
+      output:
+        log_contains: id "100004"

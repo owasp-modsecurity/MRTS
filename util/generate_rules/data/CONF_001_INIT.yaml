@@ -1,0 +1,22 @@
+target: null
+rulefile: MRTS_001_INIT.conf
+testfile: null
+objects:
+- object: secaction
+  actions:
+    id: 10001
+    phase: 1
+    pass: null
+    nolog: null
+    msg: "'Initial settings'"
+    ctl: ruleEngine=DetectionOnly
+- object: secrule
+  target: REQUEST_HEADERS:X-MRTS-Test
+  operator: '@rx ^.*$'
+  actions:
+    id: 10002
+    phase: 1
+    pass: null
+    t: none
+    log: null
+    msg: "'%{MATCHED_VAR}'"
