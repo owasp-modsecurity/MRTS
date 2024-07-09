@@ -213,14 +213,14 @@ class RuleGenerator(object):
                                             item = copy.deepcopy(self.testdict['item'])
                                             item['test_title'] = "%d-%d" % (self.currid, testcnt)
                                             item['stages'][0]['stage']['input']['method'] = self.current_confdata['phase_methods'][phase].upper()
-                                            if self.current_confdata['phase_methods'][phase].lower() == "post":
+                                            if self.current_testdata['phase_methods'][phase].lower() == "post":
                                                 if isinstance(test['test']['data'], dict):
                                                     ik, iv = list(test['test']['data'].items())[0]
                                                     item['stages'][0]['stage']['input']['data'] = "%s=%s" % (ik, iv)
                                                 elif isinstance(test['test']['data'], str):
                                                     item['stages'][0]['stage']['input']['data'] = "%s" % (test['test']['data'])
                                                 item['stages'][0]['stage']['input']['uri'] = "/post"
-                                            if self.current_confdata['phase_methods'][phase].lower() == "get":
+                                            if self.current_testdata['phase_methods'][phase].lower() == "get":
                                                 if isinstance(test['test']['data'], dict):
                                                     ik, iv = list(test['test']['data'].items())[0]
                                                     item['stages'][0]['stage']['input']['uri'] = "/?%s=%s" % (ik, iv)
