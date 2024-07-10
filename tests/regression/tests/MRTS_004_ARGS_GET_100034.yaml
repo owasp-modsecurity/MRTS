@@ -2,10 +2,10 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_110_XML.yaml
+  name: MRTS_004_ARGS_GET.yaml
   description: Desc
 tests:
-- test_title: 100022-1
+- test_title: 100034-1
   stages:
   - stage:
       input:
@@ -16,9 +16,7 @@ tests:
           User-Agent: OWASP MRTS test agent
           Host: localhost
           Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-          Content-Type: application/xml
-        uri: /post
+        uri: /?arg_foo=attack
         version: HTTP/1.1
-        data: <level1><level2>foo</level2><level2>bar</level2></level1>
       output:
-        log_contains: id "100022"
+        log_contains: id "100034"
