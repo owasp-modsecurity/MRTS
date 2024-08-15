@@ -51,7 +51,7 @@ class RuleGenerator(object):
         self.content          = ""
         self.testcontent      = {}
 
-        self.re_tplvars  = re.compile("\$[^ \n\t\$,'\"]*")
+        self.re_tplvars  = re.compile(r"""\$[^ \n\t$,'"]*""")
 
         self.testdict         = {
             'header': {
@@ -65,23 +65,28 @@ class RuleGenerator(object):
             },
             'item': {
                 'test_title': '',
+                'ruleid': 0,
+                'test_id': 0,
+                'desc': '',
                 'stages': [
                     {
-                        'stage': {
-                            'input': {
-                                'dest_addr': '127.0.0.1',
-                                'port': 80,
-                                'method': '',
-                                'headers': {
-                                    'User-Agent': 'OWASP MRTS test agent',
-                                    'Host': 'localhost',
-                                    'Accept': 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5'
-                                },
-                                'uri': '/',
-                                'version': 'HTTP/1.1'
+                        'description': '',
+                        'input': {
+                            'dest_addr': '127.0.0.1',
+                            'port': 80,
+                            'protocol': 'http',
+                            'method': '',
+                            'headers': {
+                                'User-Agent': 'OWASP MRTS test agent',
+                                'Host': 'localhost',
+                                'Accept': 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5'
                             },
-                            'output': {
-                                'log_contains': ''
+                            'uri': '/',
+                            'version': 'HTTP/1.1'
+                        },
+                        'output': {
+                            'log': {
+                                'expect_ids': []
                             }
                         }
                     }
@@ -212,24 +217,28 @@ class RuleGenerator(object):
                                                 self.testcontent['meta']['name'] = self.current_confdata['testfile']
                                             item = copy.deepcopy(self.testdict['item'])
                                             item['test_title'] = "%d-%d" % (self.currid, testcnt)
-                                            item['stages'][0]['stage']['input']['method'] = self.current_confdata['phase_methods'][phase].upper()
+                                            item['ruleid'] = self.currid
+                                            item['test_id'] = testcnt
+                                            item['desc'] = "Test case for rule %d, #%d" % (self.currid, testcnt)
+                                            item['stages'][0]['description'] = "Send request"
+                                            item['stages'][0]['input']['method'] = self.current_confdata['phase_methods'][phase].upper()
                                             if self.current_testdata['phase_methods'][phase].lower() == "post":
                                                 if isinstance(test['test']['data'], dict):
                                                     ik, iv = list(test['test']['data'].items())[0]
-                                                    item['stages'][0]['stage']['input']['data'] = "%s=%s" % (ik, iv)
+                                                    item['stages'][0]['input']['data'] = "%s=%s" % (ik, iv)
                                                 elif isinstance(test['test']['data'], str):
-                                                    item['stages'][0]['stage']['input']['data'] = "%s" % (test['test']['data'])
-                                                item['stages'][0]['stage']['input']['uri'] = "/post"
+                                                    item['stages'][0]['input']['data'] = "%s" % (test['test']['data'])
+                                                item['stages'][0]['input']['uri'] = "/post"
                                             if self.current_testdata['phase_methods'][phase].lower() == "get":
                                                 if isinstance(test['test']['data'], dict):
                                                     ik, iv = list(test['test']['data'].items())[0]
-                                                    item['stages'][0]['stage']['input']['uri'] = "/?%s=%s" % (ik, iv)
+                                                    item['stages'][0]['input']['uri'] = "/?%s=%s" % (ik, iv)
                                             # add headers if there are
                                             if 'input' in test['test']:
                                                 if 'headers' in test['test']['input']:
                                                     for h in test['test']['input']['headers']:
-                                                        item['stages'][0]['stage']['input']['headers'][h['name']] = h['value']
-                                            item['stages'][0]['stage']['output'] = {'log_contains': "id \"%d\"" % (self.currid)}
+                                                        item['stages'][0]['input']['headers'][h['name']] = h['value']
+                                            item['stages'][0]['output']['log']['expect_ids'].append(self.currid)
                                             self.testcontent['tests'].append(item)
                                             testcnt += 1
                             # if no testdata
