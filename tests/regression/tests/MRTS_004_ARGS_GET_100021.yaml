@@ -6,62 +6,86 @@ meta:
   description: Desc
 tests:
 - test_title: 100021-1
+  ruleid: 100021
+  test_id: 1
+  desc: 'Test case for rule 100021, #1'
   stages:
-  - stage:
-      input:
-        dest_addr: 127.0.0.1
-        port: 80
-        method: POST
-        headers:
-          User-Agent: OWASP MRTS test agent
-          Host: localhost
-          Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        uri: /?foo=attack
-        version: HTTP/1.1
-      output:
-        log_contains: id "100021"
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+      uri: /?foo=attack
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100021
 - test_title: 100021-2
+  ruleid: 100021
+  test_id: 2
+  desc: 'Test case for rule 100021, #2'
   stages:
-  - stage:
-      input:
-        dest_addr: 127.0.0.1
-        port: 80
-        method: POST
-        headers:
-          User-Agent: OWASP MRTS test agent
-          Host: localhost
-          Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        uri: /?arg1=attack
-        version: HTTP/1.1
-      output:
-        log_contains: id "100021"
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+      uri: /?arg1=attack
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100021
 - test_title: 100021-3
+  ruleid: 100021
+  test_id: 3
+  desc: 'Test case for rule 100021, #3'
   stages:
-  - stage:
-      input:
-        dest_addr: 127.0.0.1
-        port: 80
-        method: POST
-        headers:
-          User-Agent: OWASP MRTS test agent
-          Host: localhost
-          Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        uri: /?arg2=attack
-        version: HTTP/1.1
-      output:
-        log_contains: id "100021"
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+      uri: /?arg2=attack
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100021
 - test_title: 100021-4
+  ruleid: 100021
+  test_id: 4
+  desc: 'Test case for rule 100021, #4'
   stages:
-  - stage:
-      input:
-        dest_addr: 127.0.0.1
-        port: 80
-        method: POST
-        headers:
-          User-Agent: OWASP MRTS test agent
-          Host: localhost
-          Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        uri: /?arg_foo=attack
-        version: HTTP/1.1
-      output:
-        log_contains: id "100021"
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+      uri: /?arg_foo=attack
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100021

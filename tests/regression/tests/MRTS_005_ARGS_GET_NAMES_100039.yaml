@@ -2,13 +2,13 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_004_ARGS_GET.yaml
+  name: MRTS_005_ARGS_GET_NAMES.yaml
   description: Desc
 tests:
-- test_title: 100022-1
-  ruleid: 100022
+- test_title: 100039-1
+  ruleid: 100039
   test_id: 1
-  desc: 'Test case for rule 100022, #1'
+  desc: 'Test case for rule 100039, #1'
   stages:
   - description: Send request
     input:
@@ -20,16 +20,16 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /?foo=attack
+      uri: /?attack=test
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100022
-- test_title: 100022-2
-  ruleid: 100022
+        - 100039
+- test_title: 100039-2
+  ruleid: 100039
   test_id: 2
-  desc: 'Test case for rule 100022, #2'
+  desc: 'Test case for rule 100039, #2'
   stages:
   - description: Send request
     input:
@@ -41,16 +41,16 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /?arg1=attack
+      uri: /?attack1=test
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100022
-- test_title: 100022-3
-  ruleid: 100022
+        - 100039
+- test_title: 100039-3
+  ruleid: 100039
   test_id: 3
-  desc: 'Test case for rule 100022, #3'
+  desc: 'Test case for rule 100039, #3'
   stages:
   - description: Send request
     input:
@@ -62,16 +62,16 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /?arg2=attack
+      uri: /?attack2=test
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100022
-- test_title: 100022-4
-  ruleid: 100022
+        - 100039
+- test_title: 100039-4
+  ruleid: 100039
   test_id: 4
-  desc: 'Test case for rule 100022, #4'
+  desc: 'Test case for rule 100039, #4'
   stages:
   - description: Send request
     input:
@@ -83,9 +83,9 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /?arg_foo=attack
+      uri: /?attack_foo=test
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100022
+        - 100039

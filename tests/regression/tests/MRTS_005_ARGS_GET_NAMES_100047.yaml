@@ -2,13 +2,13 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_003_ARGS_COMBINED_SIZE.yaml
+  name: MRTS_005_ARGS_GET_NAMES.yaml
   description: Desc
 tests:
-- test_title: 100018-1
-  ruleid: 100018
+- test_title: 100047-1
+  ruleid: 100047
   test_id: 1
-  desc: 'Test case for rule 100018, #1'
+  desc: 'Test case for rule 100047, #1'
   stages:
   - description: Send request
     input:
@@ -20,17 +20,16 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /post
+      uri: /?attack1=test
       version: HTTP/1.1
-      data: foo=attack
     output:
       log:
         expect_ids:
-        - 100018
-- test_title: 100018-2
-  ruleid: 100018
+        - 100047
+- test_title: 100047-2
+  ruleid: 100047
   test_id: 2
-  desc: 'Test case for rule 100018, #2'
+  desc: 'Test case for rule 100047, #2'
   stages:
   - description: Send request
     input:
@@ -42,32 +41,9 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /post
+      uri: /?attack2=test
       version: HTTP/1.1
-      data: arg1=attack
     output:
       log:
         expect_ids:
-        - 100018
-- test_title: 100018-3
-  ruleid: 100018
-  test_id: 3
-  desc: 'Test case for rule 100018, #3'
-  stages:
-  - description: Send request
-    input:
-      dest_addr: 127.0.0.1
-      port: 80
-      protocol: http
-      method: POST
-      headers:
-        User-Agent: OWASP MRTS test agent
-        Host: localhost
-        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /post
-      version: HTTP/1.1
-      data: arg2=attack
-    output:
-      log:
-        expect_ids:
-        - 100018
+        - 100047

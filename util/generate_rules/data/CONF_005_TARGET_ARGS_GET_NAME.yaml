@@ -1,0 +1,43 @@
+target: ARGS_GET_NAMES
+rulefile: MRTS_005_ARGS_GET_NAMES.conf
+testfile: MRTS_005_ARGS_GET_NAMES.yaml
+templates:
+  - SecRule for TARGETS
+colkey:
+  - - ''
+  - - attack1
+  - - attack1
+    - attack2
+  - - /^attack_.*$/
+operator:
+  - '@contains'
+oparg:
+  - attack
+phase:
+  - 1
+  - 2
+  - 3
+  - 4
+testdata:
+  phase_methods:
+    1: get
+    2: get
+    3: get
+    4: get
+  targets:
+    - target: ''
+      test:
+        data:
+          attack: test
+    - target: attack1
+      test:
+        data:
+          attack1: test
+    - target: attack2
+      test:
+        data:
+          attack2: test
+    - target: /^attack_.*$/
+      test:
+        data:
+          attack_foo: test

@@ -2,13 +2,13 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_004_ARGS_GET.yaml
+  name: MRTS_110_XML.yaml
   description: Desc
 tests:
-- test_title: 100027-1
-  ruleid: 100027
+- test_title: 100052-1
+  ruleid: 100052
   test_id: 1
-  desc: 'Test case for rule 100027, #1'
+  desc: 'Test case for rule 100052, #1'
   stages:
   - description: Send request
     input:
@@ -20,9 +20,11 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-      uri: /?arg1=attack
+        Content-Type: application/xml
+      uri: /post
       version: HTTP/1.1
+      data: <level1><level2>foo</level2><level2>bar</level2></level1>
     output:
       log:
         expect_ids:
-        - 100027
+        - 100052

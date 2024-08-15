@@ -6,34 +6,46 @@ meta:
   description: Desc
 tests:
 - test_title: 100010-1
+  ruleid: 100010
+  test_id: 1
+  desc: 'Test case for rule 100010, #1'
   stages:
-  - stage:
-      input:
-        dest_addr: 127.0.0.1
-        port: 80
-        method: POST
-        headers:
-          User-Agent: OWASP MRTS test agent
-          Host: localhost
-          Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        uri: /post
-        version: HTTP/1.1
-        data: arg1=attack
-      output:
-        log_contains: id "100010"
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+      uri: /post
+      version: HTTP/1.1
+      data: arg1=attack
+    output:
+      log:
+        expect_ids:
+        - 100010
 - test_title: 100010-2
+  ruleid: 100010
+  test_id: 2
+  desc: 'Test case for rule 100010, #2'
   stages:
-  - stage:
-      input:
-        dest_addr: 127.0.0.1
-        port: 80
-        method: POST
-        headers:
-          User-Agent: OWASP MRTS test agent
-          Host: localhost
-          Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        uri: /post
-        version: HTTP/1.1
-        data: arg2=attack
-      output:
-        log_contains: id "100010"
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+      uri: /post
+      version: HTTP/1.1
+      data: arg2=attack
+    output:
+      log:
+        expect_ids:
+        - 100010
