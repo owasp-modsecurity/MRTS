@@ -5,10 +5,10 @@ meta:
   name: MRTS_110_XML.yaml
   description: Desc
 tests:
-- test_title: 100092-1
-  ruleid: 100092
+- test_title: 100138-1
+  ruleid: 100138
   test_id: 1
-  desc: 'Test case for rule 100092, #1'
+  desc: 'Test case for rule 100138, #1'
   stages:
   - description: Send request
     input:
@@ -27,4 +27,4 @@ tests:
     output:
       log:
         expect_ids:
-        - 100092
+        - 100138

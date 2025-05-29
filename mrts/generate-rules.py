@@ -9,6 +9,7 @@ import string
 import re
 import copy
 from ast import literal_eval
+import urllib.parse
 
 NAME = "MRTS"
 VERSION = "0.1"
@@ -331,17 +332,19 @@ class RuleGenerator(object):
                                                     item['desc'] = "Test case for rule %d, #%d" % (self.currid, testcnt)
                                                     item['stages'][0]['description'] = "Send request"
                                                     item['stages'][0]['input']['method'] = self.current_confdata['phase_methods'][phase].upper()
-                                                    if self.current_testdata['phase_methods'][phase].lower() == "post":
-                                                        if isinstance(test['test']['data'], dict):
-                                                            ik, iv = list(test['test']['data'].items())[0]
-                                                            item['stages'][0]['input']['data'] = "%s=%s" % (ik, iv)
-                                                        elif isinstance(test['test']['data'], str):
-                                                            item['stages'][0]['input']['data'] = "%s" % (test['test']['data'])
+                                                    method = self.current_testdata['phase_methods'][phase].lower()
+                                                    data = test['test']['data']
+                                                    if method == "post":
+                                                        if isinstance(data, dict):
+                                                            encoded_data = urllib.parse.urlencode(data)
+                                                            item['stages'][0]['input']['data'] = encoded_data
+                                                        elif isinstance(data, str):
+                                                            item['stages'][0]['input']['data'] = data
                                                         item['stages'][0]['input']['uri'] = "/post"
-                                                    if self.current_testdata['phase_methods'][phase].lower() == "get":
-                                                        if isinstance(test['test']['data'], dict):
-                                                            ik, iv = list(test['test']['data'].items())[0]
-                                                            item['stages'][0]['input']['uri'] = "/?%s=%s" % (ik, iv)
+                                                    elif method == "get":
+                                                        if isinstance(data, dict):
+                                                            query = urllib.parse.urlencode(data)
+                                                            item['stages'][0]['input']['uri'] = "/?" + query
                                                     # add headers if there are
                                                     if 'input' in test['test']:
                                                         if 'headers' in test['test']['input']:
@@ -354,10 +357,12 @@ class RuleGenerator(object):
                                                     # overwrite default output field
                                                     if 'output' in test['test']:
                                                         item['stages'][0]['output'] = test['test']['output']
-                                                        # if expect_ids is in rewrite, append the current rule id
+                                                        # if [no_]expect_ids is in rewrite, append the current rule id
                                                         if 'log' in item['stages'][0]['output']:
                                                             if 'expect_ids' in item['stages'][0]['output']['log']:
-                                                                item['stages'][0]['output']['log']['expect_ids'].append(self.currid)
+                                                                item['stages'][0]['output']['log']['expect_ids'] = [self.currid]
+                                                            if 'no_expect_ids' in item['stages'][0]['output']['log']:
+                                                                item['stages'][0]['output']['log']['no_expect_ids'] = [self.currid]
                                                     else:
                                                         item['stages'][0]['output']['log']['expect_ids'].append(self.currid)
 

@@ -1,0 +1,30 @@
+---
+meta:
+  author: MRTS generate-rules.py
+  enabled: true
+  name: MRTS_026_MATCHED_VARS_NAMES.yaml
+  description: Desc
+tests:
+- test_title: 100122-1
+  ruleid: 100122
+  test_id: 1
+  desc: 'Test case for rule 100122, #1'
+  stages:
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+        Cookie: matched_vars_names_test=matched_vars_names_test
+      uri: /post
+      version: HTTP/1.1
+      data: matched_vars_names_test=matched_vars_names_test
+    output:
+      log:
+        expect_ids:
+        - 100122

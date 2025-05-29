@@ -1,0 +1,38 @@
+target: MATCHED_VARS_NAMES
+rulefile: MRTS_026_MATCHED_VARS_NAMES.conf
+testfile: MRTS_026_MATCHED_VARS_NAMES.yaml
+templates:
+- Non-disruptive SecRule for TARGETS
+colkey:
+- - ''
+operator:
+- '@contains'
+oparg:
+- ARGS:matched_vars_names_test
+- ARGS_NAMES:matched_vars_names_test
+- REQUEST_COOKIES:matched_vars_names_test
+generation:
+  before_each: |
+    SecRule ARGS|ARGS_NAMES|REQUEST_COOKIES "@rx matched_vars_names_test" "id:${CURRID}$, phase:${PHASE}$, pass, log, msg:'matched vars is: %{MATCHED_VARS_NAMES}'"
+phase:
+- 1
+- 2
+- 3
+- 4
+- 5
+testdata:
+  phase_methods:
+    1: get
+    2: post
+    3: post
+    4: post
+    5: post
+  targets:
+    - target: ''
+      test:
+        data:
+          matched_vars_names_test: matched_vars_names_test
+        input:
+          headers:
+            - name: Cookie
+              value: matched_vars_names_test=matched_vars_names_test

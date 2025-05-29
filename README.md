@@ -620,6 +620,16 @@ To combine the default check on the current rule id with additional checks, the 
 
 This way, the status check will be used in addition to the default rule id check.
 
+For writing negative tests, you can also use the `no_expect_ids` test in the same way: 
+
+```yaml
+          output:
+            log:
+                no_expect_ids: []
+``` 
+
+This way, the current rule id will be appended and the check verifies it does not show up in logs.
+
 Exact properties, syntax, available checks and parameters are dependent on the used version of `go-ftw`. The generator will simply replace what is defined under the `output` field in the corresponding field of the generated test case.
 
  As described for `go-ftw`,  [if any of the checks fail the test will fail](https://github.com/coreruleset/go-ftw?tab=readme-ov-file#how-log-parsing-works).
