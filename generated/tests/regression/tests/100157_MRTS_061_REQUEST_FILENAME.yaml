@@ -2,13 +2,13 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_069_RESPONSE_BODY.yaml
+  name: MRTS_061_REQUEST_FILENAME.yaml
   description: Desc
 tests:
-- test_title: 100153-1
-  ruleid: 100153
+- test_title: 100157-1
+  ruleid: 100157
   test_id: 1
-  desc: 'Test case for rule 100153, #1'
+  desc: 'Test case for rule 100157, #1'
   stages:
   - description: Send request
     input:
@@ -20,18 +20,16 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Content-Type: application/json
-      uri: /reflect
+      uri: /in/uri/attack?arg=value
       version: HTTP/1.1
-      data: '{"status": 200, "headers": {"Content-Type":"text/plain"}, "body": "attack"}'
     output:
       log:
         expect_ids:
-        - 100153
-- test_title: 100153-2
-  ruleid: 100153
+        - 100157
+- test_title: 100157-2
+  ruleid: 100157
   test_id: 2
-  desc: 'Test case for rule 100153, #2'
+  desc: 'Test case for rule 100157, #2'
   stages:
   - description: Send request
     input:
@@ -43,18 +41,16 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Content-Type: application/json
-      uri: /reflect
+      uri: /attack/in/uri?arg=value
       version: HTTP/1.1
-      data: '{"status": 200, "headers": {"Content-Type":"text/html"}, "body": "<html>attack</html>"}'
     output:
       log:
         expect_ids:
-        - 100153
-- test_title: 100153-3
-  ruleid: 100153
+        - 100157
+- test_title: 100157-3
+  ruleid: 100157
   test_id: 3
-  desc: 'Test case for rule 100153, #3'
+  desc: 'Test case for rule 100157, #3'
   stages:
   - description: Send request
     input:
@@ -66,18 +62,16 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Content-Type: application/json
-      uri: /reflect
+      uri: /in/uri/is%3Fattack?arg=value
       version: HTTP/1.1
-      data: '{"status": 200, "headers": {"Content-Type":"text/xml"}, "body": "<level1><level2>attack</level2><level2>foo</level2></level1>"}'
     output:
       log:
         expect_ids:
-        - 100153
-- test_title: 100153-4
-  ruleid: 100153
+        - 100157
+- test_title: 100157-4
+  ruleid: 100157
   test_id: 4
-  desc: 'Test case for rule 100153, #4'
+  desc: 'Test case for rule 100157, #4'
   stages:
   - description: Send request
     input:
@@ -89,12 +83,9 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Content-Type: application/json
-      uri: /reflect
+      uri: /in/uri/is?attack
       version: HTTP/1.1
-      data: '{"status": 200, "headers": {"Content-Type":"application/json"}, "body":
-        "{test:attack}"}'
     output:
       log:
-        expect_ids:
-        - 100153
+        no_expect_ids:
+        - 100157

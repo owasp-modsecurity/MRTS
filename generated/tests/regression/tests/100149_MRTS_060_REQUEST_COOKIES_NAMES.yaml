@@ -5,91 +5,91 @@ meta:
   name: MRTS_060_REQUEST_COOKIES_NAMES.yaml
   description: Desc
 tests:
-- test_title: 100146-1
-  ruleid: 100146
+- test_title: 100149-1
+  ruleid: 100149
   test_id: 1
-  desc: 'Test case for rule 100146, #1'
+  desc: 'Test case for rule 100149, #1'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
         Cookie: attack1=test
-      uri: /
+      uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100146
-- test_title: 100146-2
-  ruleid: 100146
+        - 100149
+- test_title: 100149-2
+  ruleid: 100149
   test_id: 2
-  desc: 'Test case for rule 100146, #2'
+  desc: 'Test case for rule 100149, #2'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
         Cookie: attack1=test;hello=test
-      uri: /
+      uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100146
-- test_title: 100146-3
-  ruleid: 100146
+        - 100149
+- test_title: 100149-3
+  ruleid: 100149
   test_id: 3
-  desc: 'Test case for rule 100146, #3'
+  desc: 'Test case for rule 100149, #3'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
         Cookie: attack2=test
-      uri: /
+      uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100146
-- test_title: 100146-4
-  ruleid: 100146
+        - 100149
+- test_title: 100149-4
+  ruleid: 100149
   test_id: 4
-  desc: 'Test case for rule 100146, #4'
+  desc: 'Test case for rule 100149, #4'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
         Cookie: hello=test;attack2=test
-      uri: /
+      uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100146
+        - 100149

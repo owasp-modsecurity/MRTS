@@ -5,10 +5,10 @@ meta:
   name: MRTS_061_REQUEST_FILENAME.yaml
   description: Desc
 tests:
-- test_title: 100150-1
-  ruleid: 100150
+- test_title: 100156-1
+  ruleid: 100156
   test_id: 1
-  desc: 'Test case for rule 100150, #1'
+  desc: 'Test case for rule 100156, #1'
   stages:
   - description: Send request
     input:
@@ -25,11 +25,11 @@ tests:
     output:
       log:
         expect_ids:
-        - 100150
-- test_title: 100150-2
-  ruleid: 100150
+        - 100156
+- test_title: 100156-2
+  ruleid: 100156
   test_id: 2
-  desc: 'Test case for rule 100150, #2'
+  desc: 'Test case for rule 100156, #2'
   stages:
   - description: Send request
     input:
@@ -46,11 +46,11 @@ tests:
     output:
       log:
         expect_ids:
-        - 100150
-- test_title: 100150-3
-  ruleid: 100150
+        - 100156
+- test_title: 100156-3
+  ruleid: 100156
   test_id: 3
-  desc: 'Test case for rule 100150, #3'
+  desc: 'Test case for rule 100156, #3'
   stages:
   - description: Send request
     input:
@@ -67,11 +67,11 @@ tests:
     output:
       log:
         expect_ids:
-        - 100150
-- test_title: 100150-4
-  ruleid: 100150
+        - 100156
+- test_title: 100156-4
+  ruleid: 100156
   test_id: 4
-  desc: 'Test case for rule 100150, #4'
+  desc: 'Test case for rule 100156, #4'
   stages:
   - description: Send request
     input:
@@ -88,4 +88,4 @@ tests:
     output:
       log:
         no_expect_ids:
-        - 100150
+        - 100156

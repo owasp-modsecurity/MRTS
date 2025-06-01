@@ -15,13 +15,13 @@ tests:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: POST
+      method: GET
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
         Cookie: attack1=test
-      uri: /post
+      uri: /
       version: HTTP/1.1
     output:
       log:
@@ -37,57 +37,13 @@ tests:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: POST
+      method: GET
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
         Cookie: attack1=test;hello=test
-      uri: /post
-      version: HTTP/1.1
-    output:
-      log:
-        expect_ids:
-        - 100142
-- test_title: 100142-3
-  ruleid: 100142
-  test_id: 3
-  desc: 'Test case for rule 100142, #3'
-  stages:
-  - description: Send request
-    input:
-      dest_addr: 127.0.0.1
-      port: 80
-      protocol: http
-      method: POST
-      headers:
-        User-Agent: OWASP MRTS test agent
-        Host: localhost
-        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: attack2=test
-      uri: /post
-      version: HTTP/1.1
-    output:
-      log:
-        expect_ids:
-        - 100142
-- test_title: 100142-4
-  ruleid: 100142
-  test_id: 4
-  desc: 'Test case for rule 100142, #4'
-  stages:
-  - description: Send request
-    input:
-      dest_addr: 127.0.0.1
-      port: 80
-      protocol: http
-      method: POST
-      headers:
-        User-Agent: OWASP MRTS test agent
-        Host: localhost
-        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: hello=test;attack2=test
-      uri: /post
+      uri: /
       version: HTTP/1.1
     output:
       log:

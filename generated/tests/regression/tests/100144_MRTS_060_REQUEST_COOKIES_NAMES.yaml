@@ -15,13 +15,13 @@ tests:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: attack_foo=test
-      uri: /
+        Cookie: attack1=test
+      uri: /post
       version: HTTP/1.1
     output:
       log:
@@ -37,13 +37,13 @@ tests:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: hello=test;attack_foo=text;world=test
-      uri: /
+        Cookie: attack1=test;hello=test
+      uri: /post
       version: HTTP/1.1
     output:
       log:

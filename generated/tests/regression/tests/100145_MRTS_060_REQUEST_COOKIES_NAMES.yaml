@@ -20,7 +20,7 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: attack_foo=test
+        Cookie: attack1=test
       uri: /post
       version: HTTP/1.1
     output:
@@ -42,7 +42,7 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: hello=test;attack_foo=text;world=test
+        Cookie: attack1=test;hello=test
       uri: /post
       version: HTTP/1.1
     output:

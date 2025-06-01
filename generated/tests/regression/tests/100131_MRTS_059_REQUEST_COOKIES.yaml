@@ -20,7 +20,7 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie_foo=attack
+        Cookie: cookie1=attack
       uri: /post
       version: HTTP/1.1
     output:
@@ -42,7 +42,51 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie_bar=hello;cookie_foo=attack;cookie_foobar=world
+        Cookie: cookie1=attack;cookie2=hello
+      uri: /post
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100131
+- test_title: 100131-3
+  ruleid: 100131
+  test_id: 3
+  desc: 'Test case for rule 100131, #3'
+  stages:
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+        Cookie: cookie2=attack
+      uri: /post
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100131
+- test_title: 100131-4
+  ruleid: 100131
+  test_id: 4
+  desc: 'Test case for rule 100131, #4'
+  stages:
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: POST
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+        Cookie: cookie1=hello;cookie2=attack
       uri: /post
       version: HTTP/1.1
     output:

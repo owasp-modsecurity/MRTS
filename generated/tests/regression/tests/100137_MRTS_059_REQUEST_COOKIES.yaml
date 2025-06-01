@@ -5,10 +5,10 @@ meta:
   name: MRTS_059_REQUEST_COOKIES.yaml
   description: Desc
 tests:
-- test_title: 100121-1
-  ruleid: 100121
+- test_title: 100137-1
+  ruleid: 100137
   test_id: 1
-  desc: 'Test case for rule 100121, #1'
+  desc: 'Test case for rule 100137, #1'
   stages:
   - description: Send request
     input:
@@ -20,17 +20,17 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie1=attack
+        Cookie: cookie_foo=attack
       uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100121
-- test_title: 100121-2
-  ruleid: 100121
+        - 100137
+- test_title: 100137-2
+  ruleid: 100137
   test_id: 2
-  desc: 'Test case for rule 100121, #2'
+  desc: 'Test case for rule 100137, #2'
   stages:
   - description: Send request
     input:
@@ -42,10 +42,10 @@ tests:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie1=attack;cookie2=hello
+        Cookie: cookie_bar=hello;cookie_foo=attack;cookie_foobar=world
       uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100121
+        - 100137

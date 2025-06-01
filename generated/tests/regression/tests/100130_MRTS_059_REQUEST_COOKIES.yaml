@@ -15,13 +15,13 @@ tests:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: POST
+      method: GET
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie_foo=attack
-      uri: /post
+        Cookie: cookie1=attack
+      uri: /
       version: HTTP/1.1
     output:
       log:
@@ -37,13 +37,57 @@ tests:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: POST
+      method: GET
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie_bar=hello;cookie_foo=attack;cookie_foobar=world
-      uri: /post
+        Cookie: cookie1=attack;cookie2=hello
+      uri: /
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100130
+- test_title: 100130-3
+  ruleid: 100130
+  test_id: 3
+  desc: 'Test case for rule 100130, #3'
+  stages:
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: GET
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+        Cookie: cookie2=attack
+      uri: /
+      version: HTTP/1.1
+    output:
+      log:
+        expect_ids:
+        - 100130
+- test_title: 100130-4
+  ruleid: 100130
+  test_id: 4
+  desc: 'Test case for rule 100130, #4'
+  stages:
+  - description: Send request
+    input:
+      dest_addr: 127.0.0.1
+      port: 80
+      protocol: http
+      method: GET
+      headers:
+        User-Agent: OWASP MRTS test agent
+        Host: localhost
+        Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+        Cookie: cookie1=hello;cookie2=attack
+      uri: /
       version: HTTP/1.1
     output:
       log:

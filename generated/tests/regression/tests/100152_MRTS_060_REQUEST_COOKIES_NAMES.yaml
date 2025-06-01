@@ -2,50 +2,50 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_059_REQUEST_COOKIES.yaml
+  name: MRTS_060_REQUEST_COOKIES_NAMES.yaml
   description: Desc
 tests:
-- test_title: 100120-1
-  ruleid: 100120
+- test_title: 100152-1
+  ruleid: 100152
   test_id: 1
-  desc: 'Test case for rule 100120, #1'
+  desc: 'Test case for rule 100152, #1'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie1=attack
-      uri: /
+        Cookie: attack_foo=test
+      uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100120
-- test_title: 100120-2
-  ruleid: 100120
+        - 100152
+- test_title: 100152-2
+  ruleid: 100152
   test_id: 2
-  desc: 'Test case for rule 100120, #2'
+  desc: 'Test case for rule 100152, #2'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: cookie1=attack;cookie2=hello
-      uri: /
+        Cookie: hello=test;attack_foo=text;world=test
+      uri: /post
       version: HTTP/1.1
     output:
       log:
         expect_ids:
-        - 100120
+        - 100152

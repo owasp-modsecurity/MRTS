@@ -1,0 +1,35 @@
+target: DURATION
+rulefile: MRTS_010_DURATION.conf
+testfile: MRTS_010_DURATION.yaml
+templates:
+- SecRule for TARGETS with ACTIONS
+generation:
+  before: | 
+    # Set starting duration marker
+    SecAction "id:${CURRID}$,phase:1, setvar:tx.duration_marker=0"
+actions:
+  - action:
+    - setvar:tx.duration_marker=%{MATCHED_VAR} # set duration marker at matched value
+colkey:
+- - ''
+operator:
+- '@gt'
+oparg:
+- '%{tx.duration_marker}' # check on previously matched duration as we expect it to increase at each phase
+phase:
+- 1
+- 2
+- 3
+- 4
+- 5
+testdata:
+  phase_methods:
+    1: get
+    2: post
+    3: post
+    4: post
+    5: post
+  targets:
+    - target: ''
+      test:
+        data: null

@@ -2,29 +2,27 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_110_XML.yaml
+  name: MRTS_010_DURATION.yaml
   description: Desc
 tests:
-- test_title: 100155-1
-  ruleid: 100155
+- test_title: 100117-1
+  ruleid: 100117
   test_id: 1
-  desc: 'Test case for rule 100155, #1'
+  desc: 'Test case for rule 100117, #1'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: POST
+      method: GET
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Content-Type: application/xml
-      uri: /post
+      uri: /
       version: HTTP/1.1
-      data: <level1><level2>foo</level2><level2>bar</level2></level1>
     output:
       log:
         expect_ids:
-        - 100155
+        - 100117

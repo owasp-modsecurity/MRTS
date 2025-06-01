@@ -2,94 +2,99 @@
 meta:
   author: MRTS generate-rules.py
   enabled: true
-  name: MRTS_060_REQUEST_COOKIES_NAMES.yaml
+  name: MRTS_069_RESPONSE_BODY.yaml
   description: Desc
 tests:
-- test_title: 100146-1
-  ruleid: 100146
+- test_title: 100159-1
+  ruleid: 100159
   test_id: 1
-  desc: 'Test case for rule 100146, #1'
+  desc: 'Test case for rule 100159, #1'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: attack1=test
-      uri: /
+        Content-Type: application/json
+      uri: /reflect
       version: HTTP/1.1
+      data: '{"status": 200, "headers": {"Content-Type":"text/plain"}, "body": "attack"}'
     output:
       log:
         expect_ids:
-        - 100146
-- test_title: 100146-2
-  ruleid: 100146
+        - 100159
+- test_title: 100159-2
+  ruleid: 100159
   test_id: 2
-  desc: 'Test case for rule 100146, #2'
+  desc: 'Test case for rule 100159, #2'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: attack1=test;hello=test
-      uri: /
+        Content-Type: application/json
+      uri: /reflect
       version: HTTP/1.1
+      data: '{"status": 200, "headers": {"Content-Type":"text/html"}, "body": "<html>attack</html>"}'
     output:
       log:
         expect_ids:
-        - 100146
-- test_title: 100146-3
-  ruleid: 100146
+        - 100159
+- test_title: 100159-3
+  ruleid: 100159
   test_id: 3
-  desc: 'Test case for rule 100146, #3'
+  desc: 'Test case for rule 100159, #3'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: attack2=test
-      uri: /
+        Content-Type: application/json
+      uri: /reflect
       version: HTTP/1.1
+      data: '{"status": 200, "headers": {"Content-Type":"text/xml"}, "body": "<level1><level2>attack</level2><level2>foo</level2></level1>"}'
     output:
       log:
         expect_ids:
-        - 100146
-- test_title: 100146-4
-  ruleid: 100146
+        - 100159
+- test_title: 100159-4
+  ruleid: 100159
   test_id: 4
-  desc: 'Test case for rule 100146, #4'
+  desc: 'Test case for rule 100159, #4'
   stages:
   - description: Send request
     input:
       dest_addr: 127.0.0.1
       port: 80
       protocol: http
-      method: GET
+      method: POST
       headers:
         User-Agent: OWASP MRTS test agent
         Host: localhost
         Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-        Cookie: hello=test;attack2=test
-      uri: /
+        Content-Type: application/json
+      uri: /reflect
       version: HTTP/1.1
+      data: '{"status": 200, "headers": {"Content-Type":"application/json"}, "body":
+        "{test:attack}"}'
     output:
       log:
         expect_ids:
-        - 100146
+        - 100159

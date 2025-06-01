@@ -22,6 +22,16 @@ global:
           log,\
           msg:'%{MATCHED_VAR_NAME} was caught in phase:${PHASE}$',\
           ver:'${VERSION}$'"
+  - name: "SecRule for TARGETS with ACTIONS"
+    template: |
+      SecRule ${TARGET}$ "${OPERATOR}$ ${OPARG}$" \
+          "id:${CURRID}$,\
+          phase:${PHASE}$,\
+          t:none,\
+          log,\
+          msg:'%{MATCHED_VAR_NAME} was caught in phase:${PHASE}$ with value %{MATCHED_VAR}',\
+          ${ACTIONS}$,\
+          ver:'${VERSION}$'"
   default_tests_phase_methods:
   - 1: get
   - 2: post
