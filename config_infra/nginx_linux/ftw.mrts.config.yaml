@@ -1,0 +1,6 @@
+logfile: 'config_infra/nginx_linux/infra/log/error.log'
+logmarkerheadername: 'X-MRTS-TEST'
+logtype:
+  name: 'nginx'
+  timeregex: "^(\\d{4}/\\d{2}/\\d{2} \\d{2}:\\d{2}:\\d{2})"
+  timeformat: "YYYY/MM/DD HH:mm:ss"

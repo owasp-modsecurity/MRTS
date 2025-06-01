@@ -703,13 +703,13 @@ SecAction "id:100020,phase:2 pass, setenv:'after=789'"
 * [albedo](https://github.com/coreruleset/albedo)
 * [go-ftw](https://github.com/coreruleset/go-ftw)
 * apache2 with the modsecurity and proxy modules for using the `apache2_ubuntu` + ModSecurity V2 infrastructure
+* libmodsecurity3 + nginx with the compiled dynamic modules, including the nginx connector, located at `/usr/lib/nginx/modules/` for using the `nginx_linux` + libmodsecurity3 infrastructure
 
 To run the tests on a provided configuration, run the tool:
 
 ~~~bash
-$ ./mrts/mrts.py
-usage: mrts.py [-h] -i /path/to/infra/ -r /path/to/mrts/*.yaml -e /path/to/mrts/rules/ -t /path/to/mrts/tests/ [-c]
-               [-f /path/to/mrts/ftw.mrts.config.yaml] [-v]
+$./mrts/mrts.py
+usage: mrts.py [-h] -i /path/to/infra/ -r /path/to/mrts/*.yaml -e /path/to/mrts/rules/ -t /path/to/mrts/tests/ [-c] [-f /path/to/mrts/ftw.mrts.config.yaml] [-v] [-F]
 mrts.py: error: the following arguments are required: -i/--infrastructure, -r/--rulesdef, -e/--expdir, -t/--testdir
 ~~~
 
@@ -721,6 +721,7 @@ As you can see there are few command line arguments.
 * `-c` - clean previously generated rule and test files
 * `-f` - `go-ftw` custom configuration file, if you don't want to use the default file provided in the infrastructure directory
 * `-v` - verbose output
+* `-F` - interrupt test set execution at first failed test
 
 For running without a custom `go-ftw` configuration, run the `mrts.py` script from the root directory of the project (or else provide a ftw configuration file with a correct relative path).
 

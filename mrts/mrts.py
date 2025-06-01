@@ -42,7 +42,7 @@ def launch_albedo():
         stderr=subprocess.DEVNULL)
 
 
-def execute_test_set(ftwconfig, infra, gentests, verbose):
+def execute_test_set(ftwconfig, infra, gentests, verbose, fail_fast):
     if not shutil.which("go-ftw"):
         print("Failure: go-ftw not installed or found in system PATH")
         sys.exit(1)
@@ -50,10 +50,17 @@ def execute_test_set(ftwconfig, infra, gentests, verbose):
     if ftwconfig is None:
         ftwconfig = os.path.join(infra, "ftw.mrts.config.yaml")
 
-    go_ftw = subprocess.Popen(
-        ["go-ftw", "run", "--config", ftwconfig, "--dir", gentests, "--wait-for-expect-status-code", "200", "--fail-fast"],
-        stdout=subprocess.PIPE
-    )
+    if fail_fast:
+        go_ftw = subprocess.Popen(
+            ["go-ftw", "run", "--config", ftwconfig, "--dir", gentests, "--wait-for-expect-status-code", "200", "--fail-fast"],
+            stdout=subprocess.PIPE
+        )
+    else:
+        go_ftw = subprocess.Popen(
+            ["go-ftw", "run", "--config", ftwconfig, "--dir", gentests, "--wait-for-expect-status-code", "200"],
+            stdout=subprocess.PIPE
+        )
+
     stdout = ""
     for line in go_ftw.stdout:
         stdout += line.decode("utf-8")
@@ -88,7 +95,7 @@ def delete_mrts_load(infra_path, verbose):
             print(f"File '{file_path}' does not exist.")
 
 
-def main(infra, ftwconfig, testconfig, genrules, gentests, verbose, clean):
+def main(infra, ftwconfig, testconfig, genrules, gentests, verbose, clean, fail_fast):
 
     if not os.getcwd() == os.path.dirname(os.path.dirname(os.path.abspath(__file__))):
         print("This script can only run from the MRTS root directory")
@@ -117,18 +124,18 @@ def main(infra, ftwconfig, testconfig, genrules, gentests, verbose, clean):
 
     # Step 5: use go-ftw to run tests
     print("Executing test set...")
-    execute_test_set(ftwconfig, infra, gentests, verbose)
+    execute_test_set(ftwconfig, infra, gentests, verbose, fail_fast)
 
     # Step 6: shutdown backend
     backend.terminate()
     print("Backend shutdown")
 
-    # Step 7: remove temporary file including rules
-    delete_mrts_load(infra_path, verbose)
-
-    # Step 8: shutdown infrastructure from stop script
+    # Step 7: shutdown infrastructure from stop script
     runpy.run_path(os.path.join(infra, "stop.py"))
     print("Infrastructure shutdown")
+
+    # Step 8: remove temporary file including rules
+    delete_mrts_load(infra_path, verbose)
 
     # The end
     print("MRTS completed")
@@ -151,8 +158,10 @@ if __name__ == '__main__':
                             help='go-ftw config file', required=False, default=None)
     parser.add_argument("-v", "--verbose", action='store_true',
                             help='Verbose output', required=False, default=False)
+    parser.add_argument("-F", "--fail_fast", action='store_true',
+                            help='Fail on first failed test', required=False, default=False)
 
     args = parser.parse_args()
 
-    main(args.infrastructure, args.ftwconfig, args.rulesdef, args.expdir, args.testdir, args.verbose, args.clean)
+    main(args.infrastructure, args.ftwconfig, args.rulesdef, args.expdir, args.testdir, args.verbose, args.clean, args.fail_fast)
 
