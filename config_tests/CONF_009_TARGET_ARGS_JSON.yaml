@@ -1,0 +1,36 @@
+target: ARGS
+rulefile: MRTS_009_ARGS_JSON.conf
+testfile: MRTS_009_ARGS_JSON.yaml
+templates:
+- SecRule for TARGETS
+colkey:
+- - ''
+- - foo
+operator:
+- '@contains'
+oparg:
+- attack
+phase:
+- 2
+- 3
+- 4
+testdata:
+  phase_methods:
+    2: post
+    3: post
+    4: post
+  targets:
+    - target: ''
+      test:
+        data: '{"foo": "attack"}'
+        input:
+          headers:
+            - name: Content-Type
+              value: application/json
+    - target: foo
+      test:
+        data: '{"foo": "attack"}'
+        input:
+          headers:
+            - name: Content-Type
+              value: application/json
